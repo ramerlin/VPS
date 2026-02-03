@@ -326,7 +326,7 @@ services:
         source: ./entrypoint.sh
         target: /entrypoint.sh
   supabase-storage:
-    image: 'supabase/storage-api:v1.33.5'
+    image: 'supabase/storage-api:v1.33.0'
     depends_on:
       supabase-db:
         condition: service_healthy
@@ -425,14 +425,6 @@ services:
       - 'VERIFY_JWT=${FUNCTIONS_VERIFY_JWT:-false}'
     volumes:
       - './volumes/functions:/home/deno/functions'
-      -
-        type: bind
-        source: ./volumes/functions/main/index.ts
-        target: /home/deno/functions/main/index.ts
-      -
-        type: bind
-        source: ./volumes/functions/hello/index.ts
-        target: /home/deno/functions/hello/index.ts
     command:
       - start
       - '--main-service'
